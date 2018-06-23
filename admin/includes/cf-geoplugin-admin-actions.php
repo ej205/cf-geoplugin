@@ -36,42 +36,6 @@ function cf_geoplugin_admin_menu(){
 			'cf_geoplugin_page_google_map'
 		);
 	}
-	$cf_geo_enable_banner=(get_option("cf_geo_enable_banner")=='true' ? true : false);
-	if($cf_geo_enable_banner)
-	{
-		/*add_submenu_page(
-			'cf-geoplugin',
-			__('Geo Banner',CFGP_NAME),
-			__('Geo Banner',CFGP_NAME),
-			'manage_options',
-			'cf-geoplugin-banner',
-			'cf_geoplugin_page_banner'
-		);
-		add_submenu_page(
-			'cf-geoplugin',
-			__('Countries',CFGP_NAME),
-			__('Countries',CFGP_NAME),
-			'manage_options',
-			'cf-geoplugin-banner-country',
-			'cf_geoplugin_page_banner_country'
-		);
-		add_submenu_page(
-			'cf-geoplugin',
-			__('Regions',CFGP_NAME),
-			__('Regions',CFGP_NAME),
-			'manage_options',
-			'cf-geoplugin-banner-region',
-			'cf_geoplugin_page_banner_region'
-		);
-		add_submenu_page(
-			'cf-geoplugin',
-			__('Cities',CFGP_NAME),
-			__('Cities',CFGP_NAME),
-			'manage_options',
-			'cf-geoplugin-banner-city',
-			'cf_geoplugin_page_banner_city'
-		);*/
-	}
 	
 	if ( current_user_can( 'edit_pages' ) && current_user_can( 'edit_posts' ) ) {
 		$cf_geo_enable_defender=get_option("cf_geo_enable_defender");
@@ -86,6 +50,56 @@ function cf_geoplugin_admin_menu(){
 				'cf_geoplugin_page_defender'
 			);
 		}
+		/* ----- Fixed issue with pages. Fixed by: Goran Zivkovic -------- */
+		$cf_geo_enable_banner=(get_option("cf_geo_enable_banner")=='true' ? true : false);
+		if($cf_geo_enable_banner)
+		{
+				add_submenu_page(
+				'cf-geoplugin',
+				__('Geo Banner',CFGP_NAME),
+				__('Geo Banner',CFGP_NAME),
+				'manage_options',
+				'edit.php?post_type=cf-geoplugin-banner'
+				);
+				add_submenu_page(
+				'cf-geoplugin',
+				__('Countries',CFGP_NAME),
+				__('Countries',CFGP_NAME),
+				'manage_options',
+				'edit-tags.php?taxonomy=cf-geoplugin-country&post_type=cf-geoplugin-banner'
+				);
+				add_submenu_page(
+				'cf-geoplugin',
+				__('Regions',CFGP_NAME),
+				__('Regions',CFGP_NAME),
+				'manage_options',
+				'edit-tags.php?taxonomy=cf-geoplugin-region&post_type=cf-geoplugin-banner'
+				);
+				add_submenu_page(
+				'cf-geoplugin',
+				__('Cities',CFGP_NAME),
+				__('Cities',CFGP_NAME),
+				'manage_options',
+				'edit-tags.php?taxonomy=cf-geoplugin-city&post_type=cf-geoplugin-banner'
+				);
+		}
+		/* ----------------------------------------------------------------------------- */
+				add_submenu_page(
+					'cf-geoplugin',
+					__('Debug Mode',CFGP_NAME),
+					__('Debug Mode',CFGP_NAME),
+					'manage_options',
+					'cf-geoplugin-debug',
+					'cf_geoplugin_page_debug'
+				);
+				add_submenu_page(
+					'cf-geoplugin',
+					__('Settings',CFGP_NAME),
+					__('Settings',CFGP_NAME),
+					'manage_options',
+					'cf-geoplugin-settings',
+					'cf_geoplugin_page_settings'
+				);
 		add_submenu_page(
 			'cf-geoplugin',
 			__('Debug Mode',CFGP_NAME),
@@ -144,14 +158,6 @@ function cf_geoplugin_page_settings() {
 function cf_geoplugin_page_activate() {
 	if ( current_user_can( 'edit_pages' ) && current_user_can( 'edit_posts' ) ) include_once( plugin_dir_path( dirname( __FILE__ ) ) . 'pages/page-activate.php');
 };
-function cf_geoplugin_page_banner() {
-}
-function cf_geoplugin_page_banner_country() {
-}
-function cf_geoplugin_page_banner_region() {
-}
-function cf_geoplugin_page_banner_city() {
-}
 function cf_geoplugin_page_faq() {
 
 }
@@ -201,7 +207,7 @@ function cfgeo_clean_url_banner($url, $original_url, $_context){
     }
 }
 
-// add_action( 'admin_init','wpse_60168_custom_menu_class' );
+add_action( 'admin_init','wpse_60168_custom_menu_class' );
 
 function wpse_60168_custom_menu_class() 
 {
