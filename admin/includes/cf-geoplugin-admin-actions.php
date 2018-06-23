@@ -84,22 +84,6 @@ function cf_geoplugin_admin_menu(){
 				);
 		}
 		/* ----------------------------------------------------------------------------- */
-				add_submenu_page(
-					'cf-geoplugin',
-					__('Debug Mode',CFGP_NAME),
-					__('Debug Mode',CFGP_NAME),
-					'manage_options',
-					'cf-geoplugin-debug',
-					'cf_geoplugin_page_debug'
-				);
-				add_submenu_page(
-					'cf-geoplugin',
-					__('Settings',CFGP_NAME),
-					__('Settings',CFGP_NAME),
-					'manage_options',
-					'cf-geoplugin-settings',
-					'cf_geoplugin_page_settings'
-				);
 		add_submenu_page(
 			'cf-geoplugin',
 			__('Debug Mode',CFGP_NAME),
